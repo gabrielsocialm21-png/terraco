@@ -1,0 +1,49 @@
+/* ============================================================
+   TERRAÇO — Spacing, radius, shadow & motion tokens
+   ============================================================ */
+
+:root {
+  /* ---- Spacing scale ---- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-30: 120px;
+
+  /* Guideline-slide gutter (the .fig lays copy on a 113–120px margin) */
+  --gutter-slide: 120px;
+
+  /* ---- Radius (from source) ---- */
+  --radius-xs: 7px;     /* IG buttons */
+  --radius-sm: 10px;
+  --radius-md: 16px;    /* color-spec panels & cards on the guide */
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+
+  /* ---- Shadows ---- */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.45);
+  --shadow-glass: 0 20px 60px rgba(134, 161, 171, 0.25);
+
+  /* protection gradient for text over imagery */
+  --scrim-bottom: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0) 60%);  /* @kind color */
+  --scrim-top: linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 55%);  /* @kind color */
+
+  /* film-grain accent tint used behind covers */
+  --grain-tint: rgba(82, 221, 235, 0.06);
+
+  /* ---- Motion ---- */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);  /* @kind other */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);       /* @kind other */
+  --dur-fast: 150ms;   /* @kind other */
+  --dur-med: 260ms;    /* @kind other */
+  --dur-slow: 480ms;   /* @kind other */
+}

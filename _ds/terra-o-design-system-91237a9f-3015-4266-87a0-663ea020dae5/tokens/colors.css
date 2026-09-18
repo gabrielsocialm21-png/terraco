@@ -1,0 +1,79 @@
+/* ============================================================
+   TERRAÇO — Color tokens
+   Two families: COOL (glass / vidro) + WARM (Sergipe / terracota),
+   over a deep charcoal base. Values transcribed from the .fig.
+   ============================================================ */
+
+:root {
+  /* ---- Base neutrals (Figma Variables) ---- */
+  --color-chumbo: #1b1b1b;         /* "Chumbo" — lead/charcoal, primary dark surface */
+  --color-off: #f2f2f2;            /* "Off" — off-white, primary light surface/text */
+  --color-cinza-medio: #777777;    /* "Cinza Médio" — medium gray, muted text */
+  --color-slate-900: #202020;      /* slide/canvas background used across the guide */
+  --color-slate-800: #202020;
+  --color-cinza-card: #686868;     /* card / neutral panel */
+  --color-black: #000000;
+  --color-white: #ffffff;
+
+  /* ---- Accent (Figma Variables) ---- */
+  --color-destaque: #52ddeb;       /* "Destaque" — bright glass cyan, the signature accent */
+  --color-destaque-2: #42b1bc;     /* secondary teal */
+
+  /* ---- Cool / glass family (vidro) ---- */
+  --color-vidro-100: #dae0e3;
+  --color-vidro-200: #cedde6;
+  --color-vidro-300: #d0e7ed;      /* rgb(208,231,237) */
+  --color-vidro-400: #92b4c0;      /* rgb(146,180,192) */
+  --color-vidro-500: #86a1ab;      /* rgb(134,161,171) */
+
+  /* ---- Warm / Sergipe family ---- */
+  --color-marsala: #ae4339;        /* "Marsala Terroso" — primary warm */
+  --color-terracota: #e58e6d;      /* "Terracota Suave" — primary warm */
+  --color-creme: #f9eedb;          /* "Creme Areia" — secondary warm */
+
+  /* ---- Signature glass gradient (from the logo lockups) ---- */
+  --gradient-vidro: linear-gradient(
+    240.5deg,
+    #cedde6 -2.26%,
+    #92b4c0 12.37%,
+    #d0e7ed 35.37%,
+    #86a1ab 68.81%,
+    #dae0e3 100.17%,
+    #ffffff 102.26%
+  ); /* @kind color */
+  /* soft cool wash used on flat panels */
+  --gradient-vidro-flat: linear-gradient(
+    34.36deg, #cedde6 4.29%, #92b4c0 38.57%, #dae0e3 66.26%, #92b4c0 87.80%
+  ); /* @kind color */
+
+  /* ---- Third-party UI (Instagram mockups) ---- */
+  --color-ig-blue: #3597f0;
+  --color-ig-bg: #000000;
+  --color-ig-surface: #1a1a1a;
+  --color-ig-border: #262626;
+  --color-ig-text-2: #a8a8a8;
+
+  /* ============================================================
+     SEMANTIC ALIASES — reach for these in components
+     ============================================================ */
+  --surface-base: var(--color-chumbo);        /* app / deck background */
+  --surface-canvas: var(--color-slate-900);   /* guideline slide canvas */
+  --surface-card: #262626;                     /* raised panel on dark */
+  --surface-card-light: var(--color-off);      /* panel on light */
+  --surface-glass: var(--color-vidro-200);
+
+  --text-primary: var(--color-off);            /* on dark */
+  --text-secondary: #b8b8b8;
+  --text-muted: var(--color-cinza-medio);
+  --text-on-light: var(--color-chumbo);
+  --text-inverse: var(--color-chumbo);
+  --text-accent: var(--color-destaque);
+
+  --border-subtle: rgba(242, 242, 242, 0.12);
+  --border-strong: rgba(242, 242, 242, 0.28);
+  --border-on-light: rgba(27, 27, 27, 0.12);
+
+  --accent: var(--color-destaque);
+  --accent-press: var(--color-destaque-2);
+  --focus-ring: var(--color-destaque);
+}

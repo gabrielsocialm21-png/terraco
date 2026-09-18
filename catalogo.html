@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/terra-o-design-system-91237a9f-3015-4266-87a0-663ea020dae5/tokens/colors.css">
+<link rel="stylesheet" href="_ds/terra-o-design-system-91237a9f-3015-4266-87a0-663ea020dae5/tokens/typography.css">
+<link rel="stylesheet" href="_ds/terra-o-design-system-91237a9f-3015-4266-87a0-663ea020dae5/tokens/effects.css">
+<link rel="stylesheet" href="_ds/terra-o-design-system-91237a9f-3015-4266-87a0-663ea020dae5/tokens/fig-tokens.css">
+<link rel="stylesheet" href="_ds/terra-o-design-system-91237a9f-3015-4266-87a0-663ea020dae5/styles.css">
+<script src="_ds/terra-o-design-system-91237a9f-3015-4266-87a0-663ea020dae5/_ds_bundle.js"></script>
+<script src="terraco-catalogo.js"></script>
+<meta name="omelette-owns-print" content="true">
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #1b1b1b; }
+  a { color: var(--color-destaque); text-decoration: none; }
+  a:hover { color: var(--color-terracota); }
+  ::selection { background: var(--color-destaque); color: #10222a; }
+  [data-cat] *, [data-cat] *::before, [data-cat] *::after { box-sizing: border-box; }
+  img { max-width: 100%; }
+  [data-cat] h1, [data-cat] h2, [data-cat] h3 { overflow-wrap: break-word; text-wrap: pretty; }
+  [data-card] img { transition: transform 700ms cubic-bezier(0.16,1,0.3,1); }
+  [data-card]:hover img { transform: scale(1.06); }
+  [data-proj] { transition: border-color 200ms ease; }
+  [data-proj]:hover { border-color: rgba(82,221,235,0.5); }
+  @media (prefers-reduced-motion: reduce) { [data-cat] * { transition: none !important; animation: none !important; } }
+  @media (max-width: 1040px) { [data-nav-links] { display: none !important; } }
+  @media (max-width: 900px) {
+    [data-hero-grid] { grid-template-columns: 1fr !important; }
+    [data-sheet-grid] { grid-template-columns: 1fr !important; }
+    [data-finish-grid] { grid-template-columns: repeat(2, 1fr) !important; }
+    [data-footer-grid] { grid-template-columns: 1fr !important; gap: 32px !important; }
+  }
+  @media (max-width: 640px) {
+    [data-nav] { padding: 12px 18px !important; }
+    [data-print-btn] { display: none !important; }
+    [data-logo] { height: 40px !important; }
+    [data-h1] { font-size: 34px !important; }
+  }
+  @media print {
+    [data-nav], [data-filters], [data-overlay], [data-print-hide], [data-menu] { display: none !important; }
+    [data-cat] { background: #fff !important; }
+    [data-grid] { grid-template-columns: 1fr 1fr !important; }
+    [data-card], section { break-inside: avoid; }
+  }
+</style>
+</helmet>
+
+<div data-cat="true" style="font-family: var(--font-institutional); background: #1b1b1b; color: var(--color-off); overflow-x: hidden; position: relative">
+
+  <header data-nav="true" style="position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 14px clamp(20px,5vw,72px); background: #000; backdrop-filter: none; border-bottom: 1px solid rgba(242,242,242,0.12); box-shadow: 0 10px 34px rgba(0,0,0,0.45);">
+    <button data-burger="true" onClick="{{ toggleMenu }}" aria-label="Menu" style="display: flex; flex: none; flex-direction: column; align-items: center; justify-content: center; gap: 6px; background: rgba(242,242,242,0.06); border: 1px solid var(--border-subtle); border-radius: 12px; cursor: pointer; width: 48px; height: 48px; padding: 0;">
+      <span style="{{ burgerTop }}"></span>
+      <span style="{{ burgerMid }}"></span>
+      <span style="{{ burgerBot }}"></span>
+    </button>
+    <a href="index.html" style="display: flex; align-items: center; justify-content: flex-start; flex: 1 1 0; min-width: 0;">
+      <img data-logo="true" src="assets-min/logos/marca-colorida-simples.png" alt="Terraço Envidraçamentos" style="height: 42px; width: auto; display: block; object-fit: contain;">
+    </a>
+    <button data-print-btn="true" onClick="{{ doPrint }}" style="display: inline-flex; flex: none; align-items: center; gap: 9px; background: rgba(242,242,242,0.07); border: 1px solid var(--border-strong); color: var(--color-off); font-family: var(--font-institutional); font-size: 15px; font-weight: 500; padding: 13px 20px; border-radius: 11px; cursor: pointer; transition: background 160ms ease; white-space: nowrap;" style-hover="background: rgba(242,242,242,0.16)">↓ Baixar PDF</button>
+    <a href="{{ waUrl }}" target="_blank" rel="noopener" data-nav-cta="true" style="display: inline-flex; flex: none; align-items: center; gap: 10px; background: var(--color-destaque); color: #10222a; font-weight: 700; font-size: 15px; padding: 14px 24px; border-radius: 11px; transition: filter 160ms ease; white-space: nowrap;" style-hover="filter: brightness(1.08)">
+      <span style="width: 8px; height: 8px; border-radius: 50%; background: #10222a; display: inline-block;"></span>
+      <span data-nav-cta-label="true">Solicitar orçamento</span>
+    </a>
+  </header>
+
+  <div data-menu="true" style="{{ mobileMenuStyle }}">
+    <a href="index.html#beneficios" onClick="{{ closeMenu }}" style="color: var(--color-off); font-size: 24px; font-family: var(--font-display); font-weight: 300;">Benefícios</a>
+    <a href="index.html#solucoes" onClick="{{ closeMenu }}" style="color: var(--color-off); font-size: 24px; font-family: var(--font-display); font-weight: 300;">Soluções</a>
+    <a href="#sistemas" onClick="{{ closeMenu }}" style="color: var(--color-off); font-size: 24px; font-family: var(--font-display); font-weight: 300;">Catálogo completo</a>
+    <a href="#acabamentos" onClick="{{ closeMenu }}" style="color: var(--color-off); font-size: 24px; font-family: var(--font-display); font-weight: 300;">Acabamentos</a>
+    <a href="index.html#projetos" onClick="{{ closeMenu }}" style="color: var(--color-off); font-size: 24px; font-family: var(--font-display); font-weight: 300;">Projetos</a>
+    <a href="#obras" onClick="{{ closeMenu }}" style="color: var(--color-off); font-size: 24px; font-family: var(--font-display); font-weight: 300;">Obras entregues</a>
+    <a href="index.html#historia" onClick="{{ closeMenu }}" style="color: var(--color-off); font-size: 24px; font-family: var(--font-display); font-weight: 300;">Nossa história</a>
+    <a href="index.html#processo" onClick="{{ closeMenu }}" style="color: var(--color-off); font-size: 24px; font-family: var(--font-display); font-weight: 300;">Como funciona</a>
+    <a href="index.html#manutencao" onClick="{{ closeMenu }}" style="color: var(--color-off); font-size: 24px; font-family: var(--font-display); font-weight: 300;">Manutenção</a>
+    <a href="index.html#faq" onClick="{{ closeMenu }}" style="color: var(--color-off); font-size: 24px; font-family: var(--font-display); font-weight: 300;">Dúvidas</a>
+    <a href="{{ waUrl }}" target="_blank" rel="noopener" onClick="{{ closeMenu }}" style="margin-top: 12px; background: var(--color-destaque); color: #10222a; font-weight: 600; font-size: 16px; padding: 14px 26px; border-radius: 10px;">Solicitar orçamento</a>
+  </div>
+
+  <section style="position: relative; overflow: hidden; border-bottom: 1px solid var(--border-subtle);">
+    <div style="position: absolute; inset: 0; background: url('assets-min/textures/grain-vidros.jpg') center/cover no-repeat; opacity: 0.5;"></div>
+    <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(27,27,27,0.86), rgba(16,26,30,0.94));"></div>
+    <div data-hero-grid="true" style="position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: clamp(56px,8vw,104px) clamp(20px,5vw,72px); display: grid; grid-template-columns: 1.25fr 0.75fr; gap: clamp(28px,5vw,64px); align-items: end;">
+      <div>
+        <p style="font-family: var(--font-label); font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--color-destaque); font-weight: 600; margin: 0 0 20px;">Catálogo 2026</p>
+        <h1 data-h1="true" style="font-family: var(--font-display); font-weight: 200; font-size: clamp(34px,5.6vw,66px); line-height: 1.03; letter-spacing: -0.015em; margin: 0 0 22px; color: #fff;">Experiência em sofisticação de ambientes</h1>
+        <p style="font-family: var(--font-institutional); font-size: 17px; line-height: 1.75; color: rgba(242,242,242,0.82); margin: 0; max-width: 56ch;">Todos os sistemas que projetamos, fabricamos e instalamos — com especificações, opções de acabamento, aplicações recomendadas e cuidados de cada linha.</p>
+      </div>
+      <div style="display: grid; gap: 1px; background: var(--border-subtle); border: 1px solid var(--border-subtle); border-radius: 16px; overflow: hidden;">
+        <div style="background: rgba(38,38,38,0.85); padding: 20px 22px;"><div style="font-family: var(--font-display); font-weight: 200; font-size: 38px; line-height: 1; color: var(--color-destaque);">15</div><div style="font-family: var(--font-label); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); margin-top: 8px;">Sistemas e serviços</div></div>
+        <div style="background: rgba(38,38,38,0.85); padding: 20px 22px;"><div style="font-family: var(--font-display); font-weight: 200; font-size: 38px; line-height: 1; color: var(--color-off);">+15</div><div style="font-family: var(--font-label); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); margin-top: 8px;">Anos de mercado · desde 2011</div></div>
+        <div style="background: rgba(38,38,38,0.85); padding: 20px 22px;"><div style="font-family: var(--font-display); font-weight: 200; font-size: 38px; line-height: 1; color: var(--color-off);">100%</div><div style="font-family: var(--font-label); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); margin-top: 8px;">Das varandas em condomínios como Mandarim e Garden Tower</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sistemas" style="background: #1b1b1b; scroll-margin-top: 90px;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: clamp(48px,6vw,80px) clamp(20px,5vw,72px) clamp(64px,9vw,120px);">
+      <div data-filters="true" style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px;">
+        <sc-for list="{{ filtros }}" as="f" hint-placeholder-count="5">
+          <button onClick="{{ f.onClick }}" style="{{ f.style }}">{{ f.label }}</button>
+        </sc-for>
+      </div>
+
+      <div data-grid="true" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;">
+        <sc-for list="{{ visiveis }}" as="p" hint-placeholder-count="6">
+          <article data-card="true" onClick="{{ p.onOpen }}" style="position: relative; border: 1px solid var(--border-subtle); border-radius: 18px; overflow: hidden; background: #262626; cursor: pointer; display: flex; flex-direction: column;">
+            <div style="position: relative; aspect-ratio: 4 / 3; overflow: hidden;">
+              <img src="{{ p.foto }}" alt="{{ p.nome }}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              <span style="{{ p.tagStyle }}">{{ p.tag }}</span>
+            </div>
+            <div style="padding: 26px 28px 28px; display: flex; flex-direction: column; flex: 1;">
+              <span style="font-family: var(--font-label); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-destaque); font-weight: 600;">{{ p.codigo }}</span>
+              <h3 style="font-family: var(--font-institutional); font-weight: 600; font-size: 20px; line-height: 1.3; margin: 12px 0 10px; color: var(--color-off);">{{ p.nome }}</h3>
+              <p style="font-family: var(--font-institutional); font-size: 15px; line-height: 1.68; color: var(--text-secondary); margin: 0 0 22px;">{{ p.resumo }}</p>
+              <span style="margin-top: auto; display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-institutional); font-size: 14px; font-weight: 600; color: var(--color-off);">Ver ficha técnica <span style="color: var(--color-destaque);">→</span></span>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="acabamentos" style="background: #202020; border-top: 1px solid var(--border-subtle); scroll-margin-top: 90px;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: clamp(64px,9vw,120px) clamp(20px,5vw,72px);">
+      <div style="max-width: 720px; margin: 0 0 48px;">
+        <p style="font-family: var(--font-label); font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--color-terracota); font-weight: 600; margin: 0 0 18px;">Acabamentos</p>
+        <h2 style="font-family: var(--font-display); font-weight: 200; font-size: clamp(30px,4.6vw,54px); line-height: 1.05; letter-spacing: -0.01em; margin: 0 0 18px; color: var(--color-off);">Perfis, vidros e cores de box</h2>
+        <p style="font-family: var(--font-institutional); font-size: 17px; line-height: 1.75; color: var(--text-secondary); margin: 0;">Cada sistema pode ser especificado com o perfil e o tipo de vidro que melhor conversam com o projeto. Levamos amostras físicas na visita técnica.</p>
+      </div>
+
+      <p style="font-family: var(--font-label); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 18px;">Cores de perfil (alumínio)</p>
+      <div data-finish-grid="true" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 56px;">
+        <div style="border: 1px solid var(--border-subtle); border-radius: 16px; overflow: hidden; background: #262626;">
+          <div style="height: 96px; background: linear-gradient(135deg, #FFFFFF, #E4E4E4);"></div>
+          <div style="padding: 18px 20px;"><strong style="display: block; font-family: var(--font-institutional); font-weight: 600; font-size: 15px; color: var(--color-off);">Branco</strong><span style="font-family: var(--font-institutional); font-size: 13.5px; color: var(--text-muted);">Pintura eletrostática</span></div>
+        </div>
+        <div style="border: 1px solid var(--border-subtle); border-radius: 16px; overflow: hidden; background: #262626;">
+          <div style="height: 96px; background: linear-gradient(135deg, #3A3A3A, #101010);"></div>
+          <div style="padding: 18px 20px;"><strong style="display: block; font-family: var(--font-institutional); font-weight: 600; font-size: 15px; color: var(--color-off);">Preto</strong><span style="font-family: var(--font-institutional); font-size: 13.5px; color: var(--text-muted);">Pintura eletrostática</span></div>
+        </div>
+        <div style="border: 1px solid var(--border-subtle); border-radius: 16px; overflow: hidden; background: #262626;">
+          <div style="height: 96px; background: linear-gradient(135deg, #8C6A4A, #4C3521);"></div>
+          <div style="padding: 18px 20px;"><strong style="display: block; font-family: var(--font-institutional); font-weight: 600; font-size: 15px; color: var(--color-off);">Bronze</strong><span style="font-family: var(--font-institutional); font-size: 13.5px; color: var(--text-muted);">Anodizado</span></div>
+        </div>
+        <div style="border: 1px solid var(--border-subtle); border-radius: 16px; overflow: hidden; background: #262626;">
+          <div style="height: 96px; background: linear-gradient(135deg, #DAE0E3, #92B4C0);"></div>
+          <div style="padding: 18px 20px;"><strong style="display: block; font-family: var(--font-institutional); font-weight: 600; font-size: 15px; color: var(--color-off);">Natural</strong><span style="font-family: var(--font-institutional); font-size: 13.5px; color: var(--text-muted);">Alumínio anodizado fosco</span></div>
+        </div>
+      </div>
+
+      <p style="font-family: var(--font-label); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 18px;">Tipos de vidro</p>
+      <div data-finish-grid="true" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 56px;">
+        <div style="border: 1px solid var(--border-subtle); border-radius: 16px; overflow: hidden; background: #262626;">
+          <div style="height: 96px; background: linear-gradient(240.5deg, rgba(218,224,227,0.55), rgba(146,180,192,0.35));"></div>
+          <div style="padding: 18px 20px;"><strong style="display: block; font-family: var(--font-institutional); font-weight: 600; font-size: 15px; color: var(--color-off);">Incolor temperado</strong><span style="font-family: var(--font-institutional); font-size: 13.5px; color: var(--text-muted);">Máxima transparência</span></div>
+        </div>
+        <div style="border: 1px solid var(--border-subtle); border-radius: 16px; overflow: hidden; background: #262626;">
+          <div style="height: 96px; background: linear-gradient(240.5deg, rgba(120,150,140,0.55), rgba(60,90,80,0.5));"></div>
+          <div style="padding: 18px 20px;"><strong style="display: block; font-family: var(--font-institutional); font-weight: 600; font-size: 15px; color: var(--color-off);">Verde / fumê</strong><span style="font-family: var(--font-institutional); font-size: 13.5px; color: var(--text-muted);">Menos calor e ofuscamento</span></div>
+        </div>
+        <div style="border: 1px solid var(--border-subtle); border-radius: 16px; overflow: hidden; background: #262626;">
+          <div style="height: 96px; background: linear-gradient(240.5deg, rgba(200,205,208,0.5), rgba(120,120,120,0.45));"></div>
+          <div style="padding: 18px 20px;"><strong style="display: block; font-family: var(--font-institutional); font-weight: 600; font-size: 15px; color: var(--color-off);">Refletivo</strong><span style="font-family: var(--font-institutional); font-size: 13.5px; color: var(--text-muted);">Privacidade durante o dia</span></div>
+        </div>
+        <div style="border: 1px solid var(--border-subtle); border-radius: 16px; overflow: hidden; background: #262626;">
+          <div style="height: 96px; background: repeating-linear-gradient(90deg, rgba(242,242,242,0.22) 0 3px, rgba(242,242,242,0.05) 3px 6px);"></div>
+          <div style="padding: 18px 20px;"><strong style="display: block; font-family: var(--font-institutional); font-weight: 600; font-size: 15px; color: var(--color-off);">Jateado / acidato</strong><span style="font-family: var(--font-institutional); font-size: 13.5px; color: var(--text-muted);">Privacidade com luz natural</span></div>
+        </div>
+      </div>
+
+      <p style="font-family: var(--font-label); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 18px;">Cores de perfil para box de banheiro</p>
+      <div data-finish-grid="true" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;">
+        <div style="border: 1px solid var(--border-subtle); border-radius: 16px; overflow: hidden; background: #262626;">
+          <div style="height: 78px; background: linear-gradient(135deg, #E8C77E, #A9822F);"></div>
+          <div style="padding: 14px 18px;"><strong style="font-family: var(--font-institutional); font-weight: 600; font-size: 14.5px; color: var(--color-off);">Dourado</strong></div>
+        </div>
+        <div style="border: 1px solid var(--border-subtle); border-radius: 16px; overflow: hidden; background: #262626;">
+          <div style="height: 78px; background: linear-gradient(135deg, #FFFFFF, #E4E4E4);"></div>
+          <div style="padding: 14px 18px;"><strong style="font-family: var(--font-institutional); font-weight: 600; font-size: 14.5px; color: var(--color-off);">Branco</strong></div>
+        </div>
+        <div style="border: 1px solid var(--border-subtle); border-radius: 16px; overflow: hidden; background: #262626;">
+          <div style="height: 78px; background: linear-gradient(135deg, #3A3A3A, #0E0E0E);"></div>
+          <div style="padding: 14px 18px;"><strong style="font-family: var(--font-institutional); font-weight: 600; font-size: 14.5px; color: var(--color-off);">Preto</strong></div>
+        </div>
+        <div style="border: 1px solid var(--border-subtle); border-radius: 16px; overflow: hidden; background: #262626;">
+          <div style="height: 78px; background: linear-gradient(135deg, #F2F5F7, #9AA3A8);"></div>
+          <div style="padding: 14px 18px;"><strong style="font-family: var(--font-institutional); font-weight: 600; font-size: 14.5px; color: var(--color-off);">Cromado</strong></div>
+        </div>
+        <div style="border: 1px solid var(--border-subtle); border-radius: 16px; overflow: hidden; background: #262626;">
+          <div style="height: 78px; background: linear-gradient(135deg, #E8BBA8, #B87560);"></div>
+          <div style="padding: 14px 18px;"><strong style="font-family: var(--font-institutional); font-weight: 600; font-size: 14.5px; color: var(--color-off);">Rose gold</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="obras" style="background: #1b1b1b; border-top: 1px solid var(--border-subtle); scroll-margin-top: 90px;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: clamp(64px,9vw,120px) clamp(20px,5vw,72px);">
+      <div style="max-width: 760px; margin: 0 0 44px;">
+        <p style="font-family: var(--font-label); font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--color-destaque); font-weight: 600; margin: 0 0 18px;">Obras entregues</p>
+        <h2 style="font-family: var(--font-display); font-weight: 200; font-size: clamp(30px,4.6vw,54px); line-height: 1.05; letter-spacing: -0.01em; margin: 0 0 18px; color: var(--color-off);">Onde a Terraço já está instalada</h2>
+        <p style="font-family: var(--font-institutional); font-size: 17px; line-height: 1.75; color: var(--text-secondary); margin: 0;">Executamos 100% das instalações de envidraçamento de varandas em diversos condomínios de Aracaju — entrega pontual, equipe qualificada e pós-venda que responde.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px;">
+        <sc-for list="{{ obras }}" as="o" hint-placeholder-count="12">
+          <div data-proj="true" data-card="true" style="position: relative; border: 1px solid var(--border-subtle); border-radius: 16px; overflow: hidden; background: #262626; aspect-ratio: 4 / 3;">
+            <img src="{{ o.foto }}" alt="{{ o.nome }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;">
+            <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(27,27,27,0.05) 40%, rgba(16,16,16,0.92) 100%);"></div>
+            <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 20px 22px;">
+              <span style="font-family: var(--font-label); font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-destaque); font-weight: 600;">{{ o.tipo }}</span>
+              <div style="font-family: var(--font-institutional); font-weight: 600; font-size: 17px; line-height: 1.3; color: #fff; margin-top: 6px;">{{ o.nome }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section data-print-hide="true" style="background: #1b1b1b; border-top: 1px solid var(--border-subtle);">
+    <div style="max-width: 1200px; margin: 0 auto; padding: clamp(48px,6vw,80px) clamp(20px,5vw,72px);">
+      <div style="border: 1px dashed rgba(229,142,109,0.5); border-radius: 18px; background: rgba(229,142,109,0.06); padding: clamp(28px,4vw,44px); display: grid; gap: 14px;">
+        <p style="font-family: var(--font-label); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-terracota); font-weight: 600; margin: 0;">Área reservada · material pendente</p>
+        <h3 style="font-family: var(--font-display); font-weight: 200; font-size: clamp(24px,3.2vw,36px); line-height: 1.1; margin: 0; color: var(--color-off);">O que ainda falta confirmar</h3>
+        <p style="font-family: var(--font-institutional); font-size: 16px; line-height: 1.75; color: var(--text-secondary); margin: 0; max-width: 68ch;">Textos e fotos vieram do catálogo impresso de vocês. Faltam poucos detalhes para a página ficar completa.</p>
+        <ul style="font-family: var(--font-institutional); font-size: 15px; line-height: 1.9; color: var(--text-secondary); margin: 6px 0 0; padding-left: 20px;">
+          <li>Confirmar espessuras de vidro e vãos máximos de cada linha (hoje são valores de referência)</li>
+          <li>Depoimentos de clientes — a página "feedbacks" do catálogo antigo veio sem texto legível</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section style="position: relative; overflow: hidden;">
+    <div style="position: absolute; inset: 0; background: url('assets-min/textures/grain-terraco.jpg') center/cover no-repeat, #101a1e;"></div>
+    <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(16,26,30,0.84), rgba(16,26,30,0.93));"></div>
+    <div style="position: relative; z-index: 2; max-width: 860px; margin: 0 auto; padding: clamp(72px,10vw,132px) clamp(20px,5vw,72px); text-align: center;">
+      <p style="font-family: var(--font-label); font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--color-destaque); font-weight: 600; margin: 0 0 22px;">Especificação sob medida</p>
+      <h2 style="font-family: var(--font-display); font-weight: 200; font-size: clamp(32px,5.4vw,64px); line-height: 1.03; letter-spacing: -0.015em; margin: 0 0 22px; color: #fff;">Diga o ambiente e a gente indica o sistema certo</h2>
+      <p style="font-family: var(--font-institutional); font-size: 18px; line-height: 1.7; color: rgba(242,242,242,0.85); margin: 0 auto 38px; max-width: 52ch;">Visita técnica, medição e proposta detalhada — com amostras de perfil e vidro na mão.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 14px; justify-content: center;">
+        <a href="{{ waUrl }}" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 12px; background: var(--color-destaque); color: #10222a; font-weight: 700; font-size: 17px; padding: 18px 36px; border-radius: 14px; transition: filter 160ms ease, transform 160ms ease;" style-hover="filter: brightness(1.08); transform: translateY(-2px)">Solicitar orçamento no WhatsApp →</a>
+        <button onClick="{{ doPrint }}" style="display: inline-flex; align-items: center; gap: 10px; background: transparent; border: 1px solid var(--border-strong); color: rgba(242,242,242,0.9); font-family: var(--font-institutional); font-size: 16px; padding: 18px 30px; border-radius: 14px; cursor: pointer; transition: background 160ms ease;" style-hover="background: rgba(242,242,242,0.08)">↓ Baixar catálogo em PDF</button>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background: #141414; border-top: 1px solid var(--border-subtle);">
+    <div data-footer-grid="true" style="max-width: 1200px; margin: 0 auto; padding: clamp(48px,6vw,80px) clamp(20px,5vw,72px) 36px; display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: clamp(32px,5vw,64px);">
+      <div>
+        <img src="assets-min/logos/marca-colorida-simples.png" alt="Terraço Envidraçamentos" style="height: 60px; width: auto; object-fit: contain; object-position: left; display: block; margin-bottom: 20px;">
+        <p style="font-family: var(--font-institutional); font-size: 15px; line-height: 1.7; color: var(--text-secondary); margin: 0; max-width: 40ch;">Há mais de 15 anos, a maior referência em envidraçamento no estado de Sergipe.</p>
+      </div>
+      <div>
+        <p style="font-family: var(--font-label); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 18px;">Contato</p>
+        <a href="{{ waUrl }}" target="_blank" rel="noopener" style="display: block; font-family: var(--font-institutional); font-size: 15px; color: var(--color-off); margin-bottom: 12px;">{{ waDisplay }}</a>
+        <a href="{{ igUrl }}" target="_blank" rel="noopener" style="font-family: var(--font-institutional); font-size: 15px; color: var(--color-off);">{{ igHandle }}</a>
+      </div>
+      <div>
+        <p style="font-family: var(--font-label); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 18px;">Localização</p>
+        <p style="font-family: var(--font-institutional); font-size: 15px; line-height: 1.7; color: var(--text-secondary); margin: 0;">R. Andréia Oliveira Passos, 90<br>Cirurgia · Aracaju — SE<br>49055-443</p>
+      </div>
+    </div>
+    <div style="max-width: 1200px; margin: 0 auto; padding: 22px clamp(20px,5vw,72px); border-top: 1px solid var(--border-subtle); display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center;">
+      <span style="font-family: var(--font-institutional); font-size: 13px; color: var(--text-muted);">© 2026 Terraço Envidraçamentos · Catálogo de soluções</span>
+      <span style="font-family: var(--font-institutional); font-size: 13px; color: var(--text-muted);">Preços sob consulta</span>
+    </div>
+  </footer>
+
+  <div data-overlay="true" style="{{ overlayStyle }}" onClick="{{ close }}">
+    <div onClick="{{ stop }}" style="{{ panelStyle }}">
+      <div style="position: relative; flex: none;">
+        <img src="{{ aberto.foto }}" alt="{{ aberto.nome }}" style="width: 100%; height: clamp(180px,26vh,300px); object-fit: cover; display: block;">
+        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(27,27,27,0.35), rgba(27,27,27,0.9));"></div>
+        <button onClick="{{ close }}" aria-label="Fechar" style="position: absolute; top: 18px; right: 18px; width: 42px; height: 42px; border-radius: 50%; background: rgba(16,16,16,0.7); border: 1px solid var(--border-strong); color: var(--color-off); font-size: 18px; cursor: pointer; backdrop-filter: blur(6px);">✕</button>
+        <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: clamp(22px,3vw,34px);">
+          <span style="font-family: var(--font-label); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-destaque); font-weight: 600;">{{ aberto.codigo }} · {{ aberto.tag }}</span>
+          <h2 style="font-family: var(--font-display); font-weight: 200; font-size: clamp(26px,3.6vw,42px); line-height: 1.08; margin: 12px 0 0; color: #fff;">{{ aberto.nome }}</h2>
+        </div>
+      </div>
+
+      <div style="overflow-y: auto; padding: clamp(24px,3.5vw,40px);">
+        <p style="font-family: var(--font-institutional); font-size: 17px; line-height: 1.75; color: var(--text-secondary); margin: 0 0 34px; max-width: 70ch;">{{ aberto.descricao }}</p>
+
+        <div data-sheet-grid="true" style="display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(24px,3vw,44px);">
+          <div>
+            <p style="font-family: var(--font-label); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 16px;">Especificações</p>
+            <div style="border: 1px solid var(--border-subtle); border-radius: 14px; overflow: hidden;">
+              <sc-for list="{{ aberto.specs }}" as="s" hint-placeholder-count="5">
+                <div style="display: flex; justify-content: space-between; gap: 20px; padding: 14px 18px; border-bottom: 1px solid var(--border-subtle);">
+                  <span style="font-family: var(--font-institutional); font-size: 14px; color: var(--text-muted); flex: none; max-width: 44%;">{{ s.k }}</span>
+                  <span style="font-family: var(--font-institutional); font-size: 14.5px; color: var(--color-off); text-align: right; font-weight: 500;">{{ s.v }}</span>
+                </div>
+              </sc-for>
+            </div>
+
+            <p style="font-family: var(--font-label); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-muted); margin: 34px 0 10px;">Opções de acabamento</p>
+            <p style="font-family: var(--font-institutional); font-size: 13.5px; line-height: 1.6; color: var(--text-muted); margin: 0 0 16px;">Marque o que te interessa — vai junto na mensagem do WhatsApp.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 9px;">
+              <sc-for list="{{ aberto.acabamentos }}" as="a" hint-placeholder-count="4">
+                <button onClick="{{ a.onClick }}" style="{{ a.style }}">{{ a.nome }}</button>
+              </sc-for>
+            </div>
+          </div>
+
+          <div>
+            <p style="font-family: var(--font-label); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 16px;">Aplicações recomendadas</p>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <sc-for list="{{ aberto.aplicacoes }}" as="ap" hint-placeholder-count="4">
+                <div style="display: flex; gap: 12px; align-items: flex-start;">
+                  <span style="flex: none; width: 20px; height: 20px; border-radius: 50%; background: var(--color-destaque); color: #10222a; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; margin-top: 2px;">✓</span>
+                  <span style="font-family: var(--font-institutional); font-size: 15px; line-height: 1.6; color: var(--text-secondary);">{{ ap.nome }}</span>
+                </div>
+              </sc-for>
+            </div>
+
+            <p style="font-family: var(--font-label); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-muted); margin: 34px 0 16px;">Cuidados e manutenção</p>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <sc-for list="{{ aberto.cuidados }}" as="c" hint-placeholder-count="3">
+                <div style="display: flex; gap: 12px; align-items: flex-start;">
+                  <span style="flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--color-terracota); margin-top: 9px;"></span>
+                  <span style="font-family: var(--font-institutional); font-size: 15px; line-height: 1.6; color: var(--text-secondary);">{{ c.nome }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 38px; padding-top: 28px; border-top: 1px solid var(--border-subtle);">
+          <a href="{{ aberto.waUrl }}" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 10px; background: var(--color-destaque); color: #10222a; font-weight: 700; font-size: 15px; padding: 14px 26px; border-radius: 12px; transition: filter 160ms ease;" style-hover="filter: brightness(1.08)">Consultar este sistema →</a>
+          <span style="font-family: var(--font-institutional); font-size: 14px; color: var(--text-muted);">Preço sob consulta · orçamento sem compromisso</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;whatsappNumber&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;5579999247744&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contato&quot;},&quot;phoneDisplay&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;(79) 99924-7744&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contato&quot;},&quot;instagramHandle&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;@terracoenvidracamentos&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contato&quot;}}">
+class Component extends DCLogic {
+  state = { filtro: 'todos', aberto: null, menuOpen: false, selAcab: {} };
+
+  setFiltro = (id) => () => this.setState({ filtro: id });
+  open = (i) => () => this.setState({ aberto: i, selAcab: {}, menuOpen: false });
+  close = () => this.setState({ aberto: null });
+  toggleMenu = () => this.setState(s => ({ menuOpen: !s.menuOpen }));
+  closeMenu = () => this.setState({ menuOpen: false });
+  toggleAcab = (nome) => () => this.setState(s => {
+    const sel = Object.assign({}, s.selAcab);
+    if (sel[nome]) delete sel[nome]; else sel[nome] = true;
+    return { selAcab: sel };
+  });
+  lista() { return ((window.TERRACO_CATALOGO || {}).PRODUTOS) || []; }
+  openFromHash = () => {
+    const m = /#sistema-(.+)$/.exec(location.hash || '');
+    if (!m) return;
+    const slug = decodeURIComponent(m[1]);
+    const i = this.lista().findIndex(p => p.slug === slug);
+    if (i >= 0) this.setState({ aberto: i, selAcab: {} });
+  };
+  stop = (e) => e.stopPropagation();
+  doPrint = () => window.print();
+
+  componentDidMount() {
+    this._key = (e) => { if (e.key === 'Escape') this.close(); };
+    window.addEventListener('keydown', this._key);
+    window.addEventListener('hashchange', this.openFromHash);
+    let tries = 0;
+    const poll = () => {
+      if (window.TERRACO_CATALOGO) { this.forceUpdate(); this._deep = setTimeout(this.openFromHash, 500); return; }
+      if (++tries < 40) this._dataTimer = setTimeout(poll, 60);
+    };
+    poll();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this._key);
+    window.removeEventListener('hashchange', this.openFromHash);
+    if (this._dataTimer) clearTimeout(this._dataTimer);
+    if (this._deep) clearTimeout(this._deep);
+  }
+
+  wa() {
+    const n = String(this.props.whatsappNumber || '5579999247744').replace(/\D/g, '');
+    return 'https://wa.me/' + n + '?text=';
+  }
+
+  renderVals() {
+    const CAT = window.TERRACO_CATALOGO || {};
+    const PRODUTOS = CAT.PRODUTOS || [];
+    const OBRAS = CAT.OBRAS || [];
+    const FILTROS = CAT.FILTROS || [];
+    const base = this.wa();
+    const tagStyle = 'position:absolute;top:14px;left:14px;font-family:var(--font-label);font-size:10.5px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#10222a;background:var(--color-destaque);padding:7px 12px;border-radius:8px';
+    const produtos = PRODUTOS.map((p, i) => Object.assign({}, p, {
+      codigo: String(i + 1).padStart(2, '0'),
+      onOpen: this.open(i),
+      tagStyle,
+      waUrl: base + encodeURIComponent('Olá! Quero saber mais sobre: ' + p.nome + ' (catálogo Terraço).'),
+      acabamentos: p.acabamentos.map(nome => ({ nome })),
+      aplicacoes: p.aplicacoes.map(nome => ({ nome })),
+      cuidados: p.cuidados.map(nome => ({ nome }))
+    }));
+    const f = this.state.filtro;
+    const visiveis = produtos.filter(p => f === 'todos' || p.cat === f);
+    const idx = this.state.aberto;
+    const sel = this.state.selAcab || {};
+    const selNomes = Object.keys(sel);
+    const chipBase = 'font-family:var(--font-institutional);font-size:13.5px;padding:9px 15px;border-radius:999px;cursor:pointer;transition:background 160ms ease,border-color 160ms ease,color 160ms ease;';
+    const vazio = { specs: [], acabamentos: [], aplicacoes: [], cuidados: [], foto: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', nome: '', codigo: '', tag: '', descricao: '', waUrl: base };
+    const aberto = idx == null ? vazio : Object.assign({}, produtos[idx], {
+      waUrl: base + encodeURIComponent('Olá! Vim pelo catálogo da Terraço e tenho interesse em: ' + produtos[idx].nome +
+        ' (ref. ' + produtos[idx].codigo + ').' +
+        (selNomes.length ? ' Acabamentos de interesse: ' + selNomes.join(', ') + '.' : '') +
+        ' Pode me passar um orçamento?'),
+      acabamentos: (PRODUTOS[idx] ? PRODUTOS[idx].acabamentos : []).map(nome => ({
+        nome,
+        onClick: this.toggleAcab(nome),
+        style: chipBase + (sel[nome]
+          ? 'background:var(--color-destaque);color:#10222a;border:1px solid var(--color-destaque);font-weight:600'
+          : 'background:rgba(242,242,242,0.07);color:var(--color-off);border:1px solid var(--border-subtle)')
+      }))
+    });
+
+    return {
+      produtos, visiveis, aberto, obras: OBRAS,
+      filtros: FILTROS.map(x => ({
+        label: x.label,
+        onClick: this.setFiltro(x.id),
+        style: 'font-family:var(--font-institutional);font-size:14px;font-weight:' + (f === x.id ? '700' : '500') +
+          ';padding:11px 22px;border-radius:999px;cursor:pointer;transition:background 160ms ease,color 160ms ease;' +
+          (f === x.id
+            ? 'background:var(--color-destaque);color:#10222a;border:1px solid var(--color-destaque)'
+            : 'background:rgba(242,242,242,0.05);color:rgba(242,242,242,0.8);border:1px solid var(--border-subtle)')
+      })),
+      doPrint: this.doPrint,
+      toggleMenu: this.toggleMenu,
+      closeMenu: this.closeMenu,
+      burgerTop: 'width:24px;height:2px;background:var(--color-off);display:block;transition:transform 220ms ease,opacity 180ms ease;transform-origin:center;' + (this.state.menuOpen ? 'transform:translateY(8px) rotate(45deg)' : ''),
+      burgerMid: 'width:24px;height:2px;background:var(--color-off);display:block;transition:opacity 180ms ease;opacity:' + (this.state.menuOpen ? '0' : '1'),
+      burgerBot: 'width:24px;height:2px;background:var(--color-off);display:block;transition:transform 220ms ease;transform-origin:center;' + (this.state.menuOpen ? 'transform:translateY(-8px) rotate(-45deg)' : ''),
+      mobileMenuStyle: ['position:fixed', 'inset:0', 'z-index:110', 'background:rgba(16,16,16,0.97)', 'backdrop-filter:blur(8px)', 'display:' + (this.state.menuOpen ? 'flex' : 'none'), 'flex-direction:column', 'align-items:center', 'justify-content:center', 'gap:20px', 'padding:110px 24px 48px', 'overflow-y:auto'].join(';'),
+      close: this.close,
+      stop: this.stop,
+      overlayStyle: 'position:fixed;inset:0;z-index:130;background:rgba(8,8,8,0.86);backdrop-filter:blur(10px);display:' +
+        (idx == null ? 'none' : 'flex') + ';align-items:center;justify-content:center;padding:clamp(12px,3vw,40px)',
+      panelStyle: 'position:relative;width:min(1000px,100%);max-height:92vh;background:#1e1e1e;border:1px solid var(--border-strong);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 30px 90px rgba(0,0,0,0.6)',
+      waUrl: base + encodeURIComponent('Olá! Vi o catálogo e gostaria de solicitar um orçamento.'),
+      waDisplay: this.props.phoneDisplay || '(79) 99924-7744',
+      igHandle: this.props.instagramHandle || '@terracoenvidracamentos',
+      igUrl: 'https://instagram.com/' + String(this.props.instagramHandle || '@terracoenvidracamentos').replace(/^@/, '')
+    };
+  }
+}
+</script>
+</body>
+</html>
